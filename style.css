@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+}
+
+.game-container {
+    display: flex;
+    background-color: #444;
+    width: 400px;
+    height: 600px;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.line {
+    background-color: #999;
+    height: 100px;
+    width: 10px;
+    position: absolute;
+    left: calc(50% - 5px);
+}
+
+#score {
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    color: white;
+    font-size: 3em;
+}
+
+.car {
+    width: 30px;
+    height: 65px;
+    background-image: url('img/car.png');
+    background-size: contain;
+    transition-duration: 100ms;
+    position: absolute;
+}
+
+.my-car {
+    width: 30px;
+    height: 65px;
+    background-image: url('img/my-car.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition-duration: 100ms;
+    position: absolute;
+}
