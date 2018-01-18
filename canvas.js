@@ -70,6 +70,7 @@ function Car(isBot, x, y) {
         if(this.y > CONTAINER_HEIGHT + 20) {
             playSound();
             incrementScore(myGameArea);
+            setHighScore(myGameArea.score);
             this.refresh();
         }
         this.update();
@@ -111,7 +112,9 @@ function updateGameArea() {
     }
     
     if(willStrike(piece)) {
-        console.log('Game over');
+        showMenu();
+        myGameArea.reset();
+        resetGlobals();
         clearInterval(myGameArea.interval);
     }
     piece.update();
@@ -121,12 +124,11 @@ const myGameArea = {
     canvas : document.createElement("canvas"),
     step: 5,
     score: 0,
-    start : function() {
+    init: function() {
         this.canvas.width = CONTAINER_WIDTH;
         this.canvas.height = CONTAINER_HEIGHT;
         this.ctx = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 20);
 
         window.addEventListener('keydown', function(e) {
             const { keyCode } = e;
@@ -135,9 +137,13 @@ const myGameArea = {
         window.addEventListener("keyup", function(e) {
             myGameArea.direction = null;
         })
+
+        this.clear();
+    },
+    start : function() {
+        this.interval = setInterval(updateGameArea, 20);
     },
     clear: function() {
-        // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.fillStyle = '#444';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     },
@@ -145,10 +151,16 @@ const myGameArea = {
         this.ctx.fillStyle = '#fff'
         this.ctx.font = "30px Arial";
         this.ctx.fillText(this.score, 10, 30);
+    },
+    reset: function() {
+        clearInterval(this.interval);
+        this.clear();
+        this.score = 0;
+        this.step = 5;
     }
 }
 
-const bots = [];
+let bots = [];
 const strips = [];
 
 function startGame() {
@@ -166,4 +178,7 @@ function startGame() {
     strips[2] = new Strip(x, LINT_HEIGHT + emptyBetweenLines / 3 * 2);
 }
 
-startGame();
+// startGame();
+
+myGameArea.init();
+$('#high-score').innerText = getHighScore();

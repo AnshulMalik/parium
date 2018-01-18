@@ -86,6 +86,28 @@ function incrementScore(gameArea) {
     }
 }
 
+function resetGlobals() {
+    prevFib = 1;
+    curFib = 1;
+    bots = [];
+}
+
 function playSound() {
     $('#sound').play();
+}
+
+function showMenu() {
+    $('#high-score').innerText = getHighScore();
+    $('#menu').style.display = 'block';
+}
+
+function getHighScore() {
+    return localStorage.getItem('score') || 0;
+}
+
+function setHighScore(score) {
+    let curScore = getHighScore();
+    if(score > curScore) {
+        localStorage.setItem('score', score);
+    }
 }

@@ -48,3 +48,33 @@ body {
     transition-duration: 100ms;
     position: absolute;
 }
+
+#menu {
+    position: absolute;
+    background-color: azure;
+    text-align: center;
+    /* padding: 10px 0px; */
+    width: 300px;
+    height: 100px;
+    left: 50px;
+    top: 190px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 800;
+    border-radius: 2px;
+    box-shadow: 0px 0px 10px #444;
+}
+
+#start-btn {
+    background-color: cadetblue;
+    padding: 28px;
+    cursor: pointer;
+}
+
+#start-btn:hover {
+    background-color: #3a7072;
+    color: white;
+}
+
+.header {
+    padding: 18px 0px 0px 0px;
+}
